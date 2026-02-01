@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Courier New', monospace;
+    color: #ff4d6d;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .screen {
+    display: none;
+  }
+
+  .active {
+    display: block;
+  }
+
+  h1 {
+    font-size: 26px;
+    margin-bottom: 30px;
+  }
+
+  .btns {
+    position: relative;
+    height: 150px;
+  }
+
+  button {
+    background: #ff4d6d;
+    border: none;
+    color: white;
+    padding: 15px 35px;
+    font-size: 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 10px;
+  }
+
+  #noBtn {
+    position: absolute;
+    background: #444;
+  }
+
+  .text {
+    font-size: 20px;
+    line-height: 1.8;
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 10px;
+    height: 20px;
+    background: #ff4d6d;
+    animation: blink 1s infinite;
+    margin-left: 5px;
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+</style>
+</head>
+
+<body>
+
+<!-- SCREEN 1 -->
+<div class="screen active" id="screen1">
+  <h1>Will you be my Valentine? 💖</h1>
+
+  <div class="btns">
+    <button onclick="yesClicked()">YES ❤️</button>
+    <button id="noBtn">NO 🙃</button>
+  </div>
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen" id="screen2">
+  <div class="text">
+    <span id="typing"></span><span class="cursor"></span>
+  </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("click", moveNo);
+
+function moveNo() {
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 100);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+function yesClicked() {
+  document.getElementById("screen1").classList.remove("active");
+  document.getElementById("screen2").classList.add("active");
+  typeText();
+}
+
+const lines = [
+  "Hey Milan...",
+  "",
+  "You tried to say no 😌",
+  "But my heart already chose you.",
+  "",
+  "Thank you for being my Valentine ❤️",
+  "",
+  "— Dhana"
+];
+
+let line = 0;
+let char = 0;
+const speed = 50;
+const typingDiv = document.getElementById("typing");
+
+function typeText() {
+  if (line < lines.length) {
+    if (char < lines[line].length) {
+      typingDiv.innerHTML += lines[line].charAt(char);
+      char++;
+      setTimeout(typeText, speed);
+    } else {
+      typingDiv.innerHTML += "<br/>";
+      char = 0;
+      line++;
+      setTimeout(typeText, 600);
+    }
+  }
+}
+</script>
+
+</body>
+</html>
